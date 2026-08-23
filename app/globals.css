@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
+@theme {
+  --color-vine-orange: #C85A32;
+  --color-vine-orange-active: #B34923;
+  --color-vine-orange-light: #D96B27;
+  --color-vine-cream: #FAF8F5;
+  --color-vine-sand: #F1EBE4;
+  --color-vine-canvas: #E8E2D9;
+  --color-vine-charcoal: #1F1D1A;
+  --color-vine-muted: #615C55;
+  --color-vine-border: rgba(31, 29, 26, 0.12);
+  --color-vine-sage: #7D8C7B;
+  --color-vine-brass: #BFA57B;
+
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF8F5;
+  --foreground: #1F1D1A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Senior Accessibility & Ergonomic Defaults */
+html {
+  scroll-behavior: auto; /* Managed by Lenis */
+  font-size: 16px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAF8F5;
+  color: #1F1D1A;
+  font-family: var(--font-sans);
+  font-size: 1.125rem; /* 18px Floor for Senior Eye Comfort */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Accessible High-Contrast Focus Ring */
+*:focus-visible {
+  outline: 3px solid #C85A32 !important;
+  outline-offset: 3px !important;
+}
+
+/* Senior Touch Target Enforcer */
+button,
+a,
+input,
+select,
+textarea {
+  min-height: 48px;
+}
+
+/* Lenis Integration CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
