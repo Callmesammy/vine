@@ -41,19 +41,15 @@ const MENU_NAV_ITEMS = [
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=90',
   },
   {
-    label: 'EXPERIENCES',
-    href: '/about',
-    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=90',
-  },
-  {
     label: 'SERVICES',
-    href: '#showcase',
+    href: '/services',
     image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=90',
   },
   {
     label: 'CONTACT',
-    href: '#contact',
+    href: '/contact',
     image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=90',
+    isBold: true,
   },
 ];
 
@@ -190,35 +186,21 @@ export function FullscreenMenu() {
                     href={item.href}
                     onClick={closeMenu}
                     onMouseEnter={() => setActiveImage(item.image)}
-                    className={`overlay-nav-item font-sans font-extralight text-xl sm:text-3xl lg:text-[2.2rem] leading-none tracking-widest uppercase transition-colors min-h-[40px] inline-flex items-center justify-center ${
-                      isActive || activeImage === item.image
-                        ? 'text-[#C85A32]'
-                        : 'text-[#1F1D1A] hover:text-[#C85A32]'
+                    className={`overlay-nav-item text-xl sm:text-3xl lg:text-[2.2rem] leading-none tracking-widest uppercase transition-colors min-h-[40px] inline-flex items-center justify-center ${
+                      item.isBold
+                        ? 'font-sans font-black pt-2 text-[#1F1D1A] hover:text-[#C85A32]'
+                        : `font-sans font-extralight ${
+                            isActive || activeImage === item.image
+                              ? 'text-[#C85A32]'
+                              : 'text-[#1F1D1A] hover:text-[#C85A32]'
+                          }`
                     }`}
                   >
                     {item.label}
                   </Link>
                 );
               })}
-
-              {/* BOOK NOW - Bold Black Text */}
-              <Link
-                href="#contact"
-                onClick={closeMenu}
-                className="overlay-nav-item font-sans font-black text-xl sm:text-3xl lg:text-[2.2rem] leading-none tracking-tight uppercase text-[#1F1D1A] hover:text-[#C85A32] transition-colors pt-2 min-h-[40px] inline-flex items-center justify-center"
-              >
-                BOOK NOW
-              </Link>
             </nav>
-          </div>
-
-          {/* Bottom Language Selector */}
-          <div className="flex justify-center items-center gap-6 text-xs uppercase tracking-[0.2em] font-semibold text-[#615C55] pt-2">
-            <span className="text-[#1F1D1A]">ENGLISH</span>
-            <span>•</span>
-            <span className="hover:text-[#1F1D1A] cursor-pointer transition-colors">FRANÇAIS</span>
-            <span>•</span>
-            <span className="hover:text-[#1F1D1A] cursor-pointer transition-colors">ESPAÑOL</span>
           </div>
 
         </div>

@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import { gsap, ScrollTrigger } from '@/lib/gsap-config';
 
 interface SmoothScrollProps {
@@ -20,13 +21,13 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     }
 
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 1.8,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 2.0,
       syncTouch: true,
     });
 
@@ -47,6 +48,24 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     // Disable GSAP lag smoothing to ensure silky smooth scrub transitions
     gsap.ticker.lagSmoothing(0);
 
+    // Intercept clicks on internal anchor links for smooth scrolling via Lenis
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest('a');
+      if (!anchor) return;
+
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const element = document.querySelector(href);
+        if (element) {
+          e.preventDefault();
+          lenis.scrollTo(element as HTMLElement, { offset: 0, duration: 1.2 });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
     // Refresh ScrollTrigger after Lenis initializes
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
@@ -54,6 +73,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
 
     return () => {
       clearTimeout(timer);
+      document.removeEventListener('click', handleAnchorClick);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       lenisRef.current = null;

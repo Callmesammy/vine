@@ -9,7 +9,6 @@ import { gsap } from '@/lib/gsap-config';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { PROPERTIES } from '@/lib/data/properties';
-import { CheckCircle, ArrowLeft, PhoneCall } from 'lucide-react';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -80,15 +79,8 @@ export default function ResidenceDetailPage({ params }: PageProps) {
         ref={heroSectionRef}
         className="relative w-full min-h-screen pt-24 pb-16 px-4 sm:px-8 lg:px-12 overflow-hidden flex flex-col justify-between"
       >
-        {/* Top Back Link & Status */}
-        <div className="w-full flex items-center justify-between z-20 pb-4">
-          <Link
-            href="/residences"
-            className="min-h-[48px] inline-flex items-center gap-2 text-sm font-semibold text-[#615C55] hover:text-[#C85A32] transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>Back to Residences</span>
-          </Link>
+        {/* Top Status & Price */}
+        <div className="w-full flex items-center justify-end z-20 pb-4">
           <span className="text-xs uppercase tracking-[0.2em] font-semibold text-[#C85A32]">
             {property.status} • {property.price}
           </span>
@@ -565,97 +557,7 @@ export default function ResidenceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Page 16: Architectural Specifications & Automation */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-12 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
-          {/* Detailed Spec Table */}
-          <div className="lg:col-span-7 space-y-8">
-            <h3 className="font-serif text-3xl font-semibold text-[#1F1D1A]">
-              Architectural & Tech Specs
-            </h3>
-
-            <div className="rounded-2xl border border-[#1F1D1A]/10 overflow-hidden bg-[#FAF8F5] shadow-sm">
-              <table className="w-full text-left text-base text-[#1F1D1A]">
-                <tbody>
-                  {property.specs.map((spec, idx) => (
-                    <tr
-                      key={spec.label}
-                      className={idx % 2 === 0 ? 'bg-[#FAF8F5]' : 'bg-[#F1EBE4]/60'}
-                    >
-                      <th className="py-4 px-6 font-semibold text-[#615C55] w-1/2">{spec.label}</th>
-                      <td className="py-4 px-6 font-semibold text-[#1F1D1A]">{spec.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Automation Highlights */}
-            <div className="space-y-4 pt-4">
-              <h4 className="font-serif text-2xl font-semibold text-[#1F1D1A]">
-                Included Smart Automation Suite
-              </h4>
-              <ul className="space-y-3">
-                {property.automationHighlights.map((highlight) => (
-                  <li key={highlight} className="flex items-start gap-3 text-base text-[#1F1D1A]">
-                    <CheckCircle className="h-5 w-5 text-[#C85A32] shrink-0 mt-0.5" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Page 17: Schedule Private Walkthrough Sidebar Form */}
-          <div id="schedule-walkthrough" className="lg:col-span-5 rounded-3xl bg-[#F1EBE4] p-8 border border-[#1F1D1A]/10 shadow-lg space-y-6">
-            <h3 className="font-serif text-2xl font-semibold text-[#1F1D1A]">
-              Book Private Walkthrough
-            </h3>
-            <p className="text-sm text-[#615C55]">
-              Schedule an in-person or virtual accessibility tour of {property.name}.
-            </p>
-
-            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Walkthrough request submitted!'); }}>
-              <div>
-                <label className="block text-xs font-semibold text-[#1F1D1A] mb-1">Full Name</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Margaret Sterling"
-                  className="w-full min-h-[48px] rounded-xl bg-[#FAF8F5] border border-[#1F1D1A]/20 px-4 py-2 text-base text-[#1F1D1A]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-[#1F1D1A] mb-1">Telephone Number</label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="(800) 555-0199"
-                  className="w-full min-h-[48px] rounded-xl bg-[#FAF8F5] border border-[#1F1D1A]/20 px-4 py-2 text-base text-[#1F1D1A]"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="min-h-[48px] min-w-[48px] inline-flex w-full items-center justify-center rounded-full bg-[#C85A32] px-6 py-4 text-base font-semibold text-white hover:bg-[#B34923] transition-colors"
-              >
-                Confirm Tour Schedule
-              </button>
-            </form>
-
-            <div className="pt-4 border-t border-[#1F1D1A]/10 flex items-center justify-between text-xs text-[#615C55]">
-              <span className="flex items-center gap-1">
-                <PhoneCall className="h-4 w-4 text-[#C85A32]" />
-                Direct Hotline: (800) 555-VINE
-              </span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
+      {/* Submenu Footer */}
       <Footer />
     </main>
   );
