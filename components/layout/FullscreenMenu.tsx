@@ -1,31 +1,68 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-config';
 import { useMenuStore } from '@/lib/store/useMenuStore';
-import { SubmenuPreviewCard } from './SubmenuPreviewCard';
-import { PROPERTIES } from '@/lib/data/properties';
-import { X, ChevronRight, PhoneCall } from 'lucide-react';
+import { X } from 'lucide-react';
 
-const MENU_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Residences', href: '/residences', hasSubmenu: true },
-  { label: 'About Us', href: '/about' },
-  { label: 'Terms & Privacy', href: '/terms' },
+const MENU_NAV_ITEMS = [
+  {
+    label: 'HOME',
+    href: '/',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'VILLA ORCHARD',
+    href: '/residences/orchard-villa',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'VILLA MEADOW',
+    href: '/residences/meadow-estate',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'VILLA PALMA',
+    href: '/residences/palma-residence',
+    image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'VILLA SOLIS',
+    href: '/residences/solis-estate',
+    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'VILLA LUNA',
+    href: '/residences/luna-residence',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'EXPERIENCES',
+    href: '/about',
+    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'SERVICES',
+    href: '#showcase',
+    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    label: 'CONTACT',
+    href: '#contact',
+    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=90',
+  },
 ];
 
 export function FullscreenMenu() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const menuContentRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const { isOpen, closeMenu } = useMenuStore();
+  const [activeImage, setActiveImage] = useState(MENU_NAV_ITEMS[0].image);
 
-  const { isOpen, closeMenu, activePreviewSlug, setActivePreviewSlug } = useMenuStore();
-  const [showSubmenuDrawer, setShowSubmenuDrawer] = useState(false);
-
-  // GSAP Curtain Reveal Animation
   useGSAP(
     () => {
       if (!containerRef.current) return;
@@ -33,27 +70,27 @@ export function FullscreenMenu() {
       if (isOpen) {
         gsap.to(containerRef.current, {
           clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 0.8,
+          duration: 0.7,
           ease: 'power4.inOut',
           display: 'block',
         });
 
         gsap.fromTo(
-          '.menu-nav-item',
-          { y: 60, opacity: 0 },
+          '.overlay-nav-item',
+          { y: 30, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            stagger: 0.08,
-            duration: 0.6,
+            stagger: 0.04,
+            duration: 0.5,
             ease: 'power3.out',
-            delay: 0.3,
+            delay: 0.2,
           }
         );
       } else {
         gsap.to(containerRef.current, {
           clipPath: 'inset(0% 0% 100% 0%)',
-          duration: 0.6,
+          duration: 0.5,
           ease: 'power4.inOut',
           onComplete: () => {
             if (containerRef.current) {
@@ -66,7 +103,6 @@ export function FullscreenMenu() {
     { dependencies: [isOpen], scope: containerRef }
   );
 
-  // Keyboard escape listener for accessibility
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -77,7 +113,6 @@ export function FullscreenMenu() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, closeMenu]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -96,123 +131,98 @@ export function FullscreenMenu() {
       aria-modal="true"
       aria-label="Navigation Menu"
       style={{ clipPath: 'inset(0% 0% 100% 0%)', display: 'none' }}
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#FAF8F5] text-[#1F1D1A]"
+      className="fixed inset-0 z-50 overflow-hidden bg-[#FAF8F5] text-[#1F1D1A]"
     >
-      {/* Header Bar inside Curtain */}
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
-        <Link
-          href="/"
-          onClick={closeMenu}
-          className="min-h-[48px] min-w-[48px] inline-flex items-center text-2xl font-bold tracking-widest font-serif text-[#1F1D1A]"
-        >
-          VINE
-        </Link>
+      <div className="w-full h-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
+        
+        {/* Left Column: Full-Height Featured Image Cross-Fade on Hover */}
+        <div className="hidden lg:block lg:col-span-5 relative h-full bg-neutral-900 overflow-hidden">
+          {MENU_NAV_ITEMS.map((item) => (
+            <Image
+              key={item.label}
+              src={item.image}
+              alt={item.label}
+              fill
+              unoptimized
+              className={`object-cover transition-opacity duration-500 ease-in-out ${
+                activeImage === item.image ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+              priority
+            />
+          ))}
 
-        <button
-          onClick={closeMenu}
-          aria-label="Close menu"
-          className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full bg-[#1F1D1A]/5 p-3 text-[#1F1D1A] transition-colors hover:bg-[#C85A32] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C85A32]"
-        >
-          <X className="h-6 w-6" />
-        </button>
-      </div>
-
-      {/* Main Menu Grid Layout */}
-      <div
-        ref={menuContentRef}
-        className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-8 lg:grid-cols-12 lg:px-12 lg:py-16"
-      >
-        {/* Navigation Links Column */}
-        <div className="flex flex-col justify-between lg:col-span-6">
-          <nav aria-label="Main Navigation" className="flex flex-col space-y-4">
-            {MENU_LINKS.map((link) => {
-              const isActive = pathname === link.href;
-
-              return (
-                <div
-                  key={link.label}
-                  className="menu-nav-item border-b border-[#1F1D1A]/10 pb-4"
-                  onMouseEnter={() => {
-                    if (link.hasSubmenu) {
-                      setShowSubmenuDrawer(true);
-                    }
-                  }}
-                >
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href={link.href}
-                      onClick={closeMenu}
-                      className={`min-h-[48px] inline-flex items-center font-serif text-3xl font-medium transition-colors hover:text-[#C85A32] md:text-5xl ${
-                        isActive ? 'text-[#C85A32] font-semibold' : 'text-[#1F1D1A]'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-
-                    {link.hasSubmenu && (
-                      <button
-                        onClick={() => setShowSubmenuDrawer(!showSubmenuDrawer)}
-                        className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full bg-[#1F1D1A]/5 px-4 py-2 text-sm font-medium text-[#1F1D1A] hover:bg-[#C85A32] hover:text-white transition-colors"
-                        aria-label="Toggle Residences Preview"
-                      >
-                        <ChevronRight
-                          className={`h-5 w-5 transition-transform duration-300 ${
-                            showSubmenuDrawer ? 'rotate-90' : ''
-                          }`}
-                        />
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Submenu Residences Quick Links */}
-                  {link.hasSubmenu && showSubmenuDrawer && (
-                    <div className="mt-4 pl-4 flex flex-col space-y-2 border-l-2 border-[#C85A32]">
-                      {PROPERTIES.map((prop) => (
-                        <Link
-                          key={prop.id}
-                          href={`/residences/${prop.slug}`}
-                          onClick={closeMenu}
-                          onMouseEnter={() => setActivePreviewSlug(prop.slug)}
-                          className={`min-h-[48px] inline-flex items-center text-lg transition-colors ${
-                            activePreviewSlug === prop.slug
-                              ? 'text-[#C85A32] font-semibold'
-                              : 'text-[#615C55] hover:text-[#1F1D1A]'
-                          }`}
-                        >
-                          {prop.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-
-          {/* Concierge & Direct Contact Footer inside Menu */}
-          <div className="mt-12 menu-nav-item rounded-2xl bg-[#F1EBE4] p-6 border border-[#1F1D1A]/10">
-            <h5 className="font-serif text-lg font-semibold text-[#1F1D1A]">
-              Direct VIP Concierge Line
-            </h5>
-            <p className="mt-1 text-sm text-[#615C55]">
-              Dedicated human support for private consultations and accessibility walkthroughs.
-            </p>
-            <div className="mt-4 flex items-center gap-3">
-              <a
-                href="tel:8005558463"
-                className="min-h-[48px] min-w-[48px] inline-flex items-center gap-2 rounded-full bg-[#1F1D1A] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C85A32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C85A32]"
-              >
-                <PhoneCall className="h-4 w-4" />
-                (800) 555-VINE
-              </a>
-            </div>
+          {/* Hand-Drawn Line-Art Flower Sticker Badge */}
+          <div className="absolute bottom-12 right-10 w-24 h-24 pointer-events-none z-20">
+            <svg className="w-full h-full stroke-black fill-none stroke-[1.5]" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="12" fill="white" />
+              <path d="M50 15 C45 25, 45 35, 50 38 C55 35, 55 25, 50 15 Z" />
+              <path d="M50 62 C45 65, 45 75, 50 85 C55 75, 55 65, 50 62 Z" />
+              <path d="M15 50 C25 45, 35 45, 38 50 C35 55, 25 55, 15 50 Z" />
+              <path d="M62 50 C65 45, 75 45, 85 50 C75 55, 65 55, 62 50 Z" />
+              <path d="M25 25 C32 32, 38 38, 41 41 C38 44, 32 50, 25 25 Z" />
+              <path d="M75 75 C68 68, 62 62, 59 59 C62 56, 68 50, 75 75 Z" />
+            </svg>
           </div>
         </div>
 
-        {/* Right Desktop Submenu Preview Drawer */}
-        <div className="hidden lg:col-span-6 lg:flex lg:items-center lg:justify-center menu-nav-item">
-          <SubmenuPreviewCard />
+        {/* Right Column: Menu Links & Close Icon */}
+        <div className="lg:col-span-7 h-full flex flex-col justify-between p-6 sm:p-8 lg:p-10 relative overflow-y-auto">
+          
+          {/* Top Right Close Button */}
+          <div className="flex justify-end w-full">
+            <button
+              onClick={closeMenu}
+              aria-label="Close menu"
+              className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full p-2 text-[#1F1D1A] hover:text-[#C85A32] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C85A32]"
+            >
+              <X className="h-7 w-7 stroke-[1.5]" />
+            </button>
+          </div>
+
+          {/* Centered Vertical Menu Stack with Perfect Spacing */}
+          <div className="flex-1 flex flex-col items-center justify-center py-4">
+            <nav aria-label="Overlay Navigation" className="flex flex-col items-center space-y-2 sm:space-y-3">
+              {MENU_NAV_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={closeMenu}
+                    onMouseEnter={() => setActiveImage(item.image)}
+                    className={`overlay-nav-item font-sans font-extralight text-xl sm:text-3xl lg:text-[2.2rem] leading-none tracking-widest uppercase transition-colors min-h-[40px] inline-flex items-center justify-center ${
+                      isActive || activeImage === item.image
+                        ? 'text-[#C85A32]'
+                        : 'text-[#1F1D1A] hover:text-[#C85A32]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              {/* BOOK NOW - Bold Black Text */}
+              <Link
+                href="#contact"
+                onClick={closeMenu}
+                className="overlay-nav-item font-sans font-black text-xl sm:text-3xl lg:text-[2.2rem] leading-none tracking-tight uppercase text-[#1F1D1A] hover:text-[#C85A32] transition-colors pt-2 min-h-[40px] inline-flex items-center justify-center"
+              >
+                BOOK NOW
+              </Link>
+            </nav>
+          </div>
+
+          {/* Bottom Language Selector */}
+          <div className="flex justify-center items-center gap-6 text-xs uppercase tracking-[0.2em] font-semibold text-[#615C55] pt-2">
+            <span className="text-[#1F1D1A]">ENGLISH</span>
+            <span>•</span>
+            <span className="hover:text-[#1F1D1A] cursor-pointer transition-colors">FRANÇAIS</span>
+            <span>•</span>
+            <span className="hover:text-[#1F1D1A] cursor-pointer transition-colors">ESPAÑOL</span>
+          </div>
+
         </div>
+
       </div>
     </div>
   );

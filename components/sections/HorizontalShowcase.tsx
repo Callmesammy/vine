@@ -1,176 +1,228 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
-import { gsap, ScrollTrigger } from '@/lib/gsap-config';
-import { PROPERTIES } from '@/lib/data/properties';
-import { Bed, Bath, Maximize2, ShieldCheck, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { gsap } from '@/lib/gsap-config';
+import { ArrowRight } from 'lucide-react';
+
+const STACKED_SHOWCASE_PROPERTIES = [
+  {
+    id: 'orchard',
+    titlePrefix: 'Villa',
+    name: 'ORCHARD',
+    bgColor: '#2B1B54',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=90',
+    specs: 'Single-level 3,400 sq ft sanctuary with 3 bedrooms, 3.5 baths, heated infinity pool & zero-threshold terrace transitions.',
+    slug: 'orchard-villa',
+  },
+  {
+    id: 'meadow',
+    titlePrefix: 'Villa',
+    name: 'MEADOW',
+    bgColor: '#7A2D19',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=90',
+    specs: 'Spacious 4,200 sq ft single-story pavilion embracing circadian voice climate control & zero-step garden access.',
+    slug: 'meadow-estate',
+  },
+  {
+    id: 'palma',
+    titlePrefix: 'Villa',
+    name: 'PALMA',
+    bgColor: '#1C3D2B',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=90',
+    specs: 'Serene 3,800 sq ft ocean-view villa with ambient fall safeguards, circadian lighting & private olive courtyard.',
+    slug: 'palma-residence',
+  },
+  {
+    id: 'solis',
+    titlePrefix: 'Villa',
+    name: 'SOLIS',
+    bgColor: '#663D14',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=90',
+    specs: 'Modernist 4,500 sq ft architectural estate with automated glass portals and quiet acoustic soundproofing.',
+    slug: 'solis-estate',
+  },
+  {
+    id: 'luna',
+    titlePrefix: 'Villa',
+    name: 'LUNA',
+    bgColor: '#132438',
+    image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1600&q=90',
+    specs: 'Ultra-private 5,100 sq ft hillside residence with intuitive wellness sanctuary & zero-barrier ergonomics.',
+    slug: 'luna-residence',
+  },
+];
 
 export function HorizontalShowcase() {
-  const containerRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const pinSectionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!containerRef.current || !trackRef.current) return;
+      if (!pinSectionRef.current) return;
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
-      const cards = gsap.utils.toArray('.showcase-card');
-      const totalWidth = (cards.length - 1) * 100;
+      const cards = gsap.utils.toArray<HTMLElement>('.stacked-villa-slide');
+      if (cards.length <= 1) return;
 
-      gsap.to(trackRef.current, {
-        xPercent: -totalWidth,
-        ease: 'none',
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: pinSectionRef.current,
+          start: 'top top',
+          end: () => `+=${(cards.length - 1) * 100}%`,
           pin: true,
           scrub: 1,
-          end: () => `+=${trackRef.current?.offsetWidth || 2000}`,
+          anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
+
+      cards.forEach((card, index) => {
+        if (index === 0) return;
+
+        tl.fromTo(
+          card,
+          { yPercent: 100 },
+          {
+            yPercent: 0,
+            ease: 'none',
+          },
+          index - 1
+        );
+      });
     },
-    { scope: containerRef }
+    { scope: pinSectionRef }
   );
 
-  // Keyboard navigation for accessibility
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
-
-      if (isVisible) {
-        if (e.key === 'ArrowRight') {
-          window.scrollBy({ top: 300, behavior: 'smooth' });
-        } else if (e.key === 'ArrowLeft') {
-          window.scrollBy({ top: -300, behavior: 'smooth' });
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
   return (
-    <section
-      id="showcase"
-      ref={containerRef}
-      className="relative min-h-screen w-full bg-[#1F1D1A] text-[#FAF8F5] py-24 overflow-hidden"
-    >
-      {/* Header Info Bar */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div>
-          <span className="text-xs uppercase tracking-widest text-[#C85A32] font-semibold">
-            Featured Smart Residences
-          </span>
-          <h2 className="font-serif text-3xl sm:text-5xl font-semibold mt-2 text-white">
-            Architectural Portfolio
-          </h2>
-        </div>
-
-        <div className="flex items-center gap-4 text-xs text-[#E8E2D9]">
-          <span className="hidden sm:inline">Use Scroll or Arrow Keys to Explore</span>
-          <div className="flex gap-2">
-            <button
-              onClick={() => window.scrollBy({ top: -400, behavior: 'smooth' })}
-              className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-[#C85A32] text-white transition-colors"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              onClick={() => window.scrollBy({ top: 400, behavior: 'smooth' })}
-              className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full bg-white/10 hover:bg-[#C85A32] text-white transition-colors"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Horizontal Track Wrapper */}
-      <div className="w-full overflow-hidden">
-        <div
-          ref={trackRef}
-          className="flex gap-8 px-6 lg:px-12 w-full transition-transform ease-out"
-        >
-          {PROPERTIES.map((property) => (
-            <div
-              key={property.id}
-              className="showcase-card flex-shrink-0 w-full sm:w-[500px] md:w-[600px] lg:w-[700px] rounded-3xl bg-[#FAF8F5] text-[#1F1D1A] p-6 lg:p-8 shadow-2xl border border-white/10 flex flex-col justify-between"
-            >
-              <div>
-                {/* Image Container with Zoom hover */}
-                <div className="relative h-64 sm:h-80 w-full overflow-hidden rounded-2xl bg-neutral-200">
-                  <Image
-                    src={property.mainImage}
-                    alt={property.name}
-                    fill
-                    unoptimized
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 700px"
-                  />
-                  <div className="absolute top-4 left-4 rounded-full bg-[#1F1D1A]/85 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-white">
-                    {property.status}
-                  </div>
-                  <div className="absolute bottom-4 right-4 rounded-full bg-[#C85A32] px-4 py-1.5 text-xs font-bold text-white shadow-md flex items-center gap-1">
-                    <ShieldCheck className="h-4 w-4" />
-                    <span>WCAG AAA Zero-Barrier</span>
-                  </div>
-                </div>
-
-                {/* Title & Tagline */}
-                <div className="mt-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-serif text-3xl font-semibold text-[#1F1D1A]">
-                      {property.name}
-                    </h3>
-                    <span className="font-serif text-xl font-bold text-[#C85A32]">
-                      {property.price}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-base text-[#615C55] line-clamp-2">
-                    {property.tagline}
-                  </p>
-                </div>
-
-                {/* Specs Grid */}
-                <div className="mt-6 grid grid-cols-3 gap-3 rounded-xl bg-[#F1EBE4] p-4 text-xs font-semibold text-[#1F1D1A]">
-                  <div className="flex items-center gap-2">
-                    <Bed className="h-4 w-4 text-[#C85A32]" />
-                    <span>{property.bedrooms} Bedrooms</span>
-                  </div>
-                  <div className="flex items-center gap-2 border-x border-[#1F1D1A]/10 px-2">
-                    <Bath className="h-4 w-4 text-[#C85A32]" />
-                    <span>{property.bathrooms} Baths</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Maximize2 className="h-4 w-4 text-[#C85A32]" />
-                    <span>{property.sqft.toLocaleString()} sqft</span>
-                  </div>
-                </div>
+    <section id="showcase" className="relative w-full overflow-visible bg-[#FAF8F5] z-30">
+      
+      {/* GSAP Pinned Container for 5 Villa Slides */}
+      <div ref={pinSectionRef} className="relative h-screen w-full overflow-hidden">
+        {STACKED_SHOWCASE_PROPERTIES.map((property, index) => (
+          <div
+            key={property.id}
+            className="stacked-villa-slide absolute inset-0 h-screen w-full flex flex-col justify-between px-4 sm:px-6 lg:px-12 pt-8 pb-4 overflow-hidden shadow-2xl transition-colors"
+            style={{
+              backgroundColor: property.bgColor,
+              zIndex: 10 + index,
+            }}
+          >
+            {/* Top Row: Left Image + Top Right Description & DISCOVER CTA */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start flex-1 pt-6 sm:pt-10">
+              
+              {/* Left Column: Tall Vertical Villa Photography */}
+              <div className="lg:col-span-5 h-[45vh] sm:h-[54vh] lg:h-[58vh] relative overflow-hidden rounded-none shadow-2xl">
+                <Image
+                  src={property.image}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                  alt={`${property.titlePrefix} ${property.name}`}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                />
               </div>
 
-              {/* Action Button */}
-              <div className="mt-8">
+              {/* Right Column: Top Right Specs & DISCOVER Link */}
+              <div className="lg:col-span-7 lg:pl-8 flex flex-col items-start lg:items-end text-left lg:text-right space-y-6 pt-2 text-white">
+                <p className="font-sans font-light text-sm sm:text-base lg:text-lg leading-relaxed max-w-md opacity-90">
+                  {property.specs}
+                </p>
+
                 <Link
                   href={`/residences/${property.slug}`}
-                  className="min-h-[48px] min-w-[48px] inline-flex w-full items-center justify-between rounded-full bg-[#1F1D1A] px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-[#C85A32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C85A32]"
+                  className="group inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-widest uppercase border-b-2 border-white pb-1.5 hover:border-[#FAF8F5] hover:opacity-80 transition-all text-white"
                 >
-                  <span>View Floorplan & Tech Specs</span>
-                  <ArrowRight className="h-5 w-5" />
+                  <span>DISCOVER</span>
+                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1.5 transition-transform" />
                 </Link>
               </div>
+
             </div>
-          ))}
+
+            {/* Bottom Typography: Villa in Line Serif + NAME in Huge White Bold Sans */}
+            <div className="w-full relative z-10 pb-2 pt-2">
+              <div className="relative flex flex-nowrap items-baseline justify-between w-full whitespace-nowrap overflow-visible text-white">
+                
+                {/* Villa - Outline Line Font */}
+                <span className="font-serif text-transparent [-webkit-text-stroke:1.5px_#FFFFFF] sm:[-webkit-text-stroke:2.5px_#FFFFFF] lg:[-webkit-text-stroke:3.5px_#FFFFFF] text-[9.5vw] sm:text-[10.5vw] lg:text-[11.5vw] font-light tracking-wider select-none leading-none">
+                  {property.titlePrefix}
+                </span>
+
+                {/* NAME - Huge White Bold Text */}
+                <span className="font-sans text-[10vw] sm:text-[11.5vw] lg:text-[12.8vw] font-black tracking-tighter text-[#FAF8F5] leading-none">
+                  {property.name}
+                </span>
+
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+      {/* Continuation Section (Unpinned, continues scrolling naturally into lower sections) */}
+      <div className="relative w-full bg-[#FAF8F5] pt-12 sm:pt-20 pb-24 px-4 sm:px-6 lg:px-12 z-40">
+        
+        {/* Big Aerial Ocean Photo Overlapping Top Background + Mini Leaf Sticker */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Main Aerial Coastal Landscape Image + Mini Leaf Sticker */}
+          <div className="lg:col-span-9 relative">
+            <div className="relative w-full h-[55vh] sm:h-[70vh] lg:h-[80vh] overflow-hidden rounded-none shadow-2xl -mt-24 sm:-mt-36 lg:-mt-48 z-10 bg-neutral-200">
+              <Image
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=90"
+                alt="Aerial coastal sanctuary between turquoise ocean and tropical rainforest"
+                fill
+                unoptimized
+                className="object-cover"
+                sizes="75vw"
+              />
+            </div>
+
+            {/* Mini Leaf Line-Art Sticker Badge */}
+            <div className="absolute -top-32 sm:-top-44 lg:-top-56 right-4 sm:right-8 lg:right-12 w-24 h-24 sm:w-36 sm:h-36 bg-[#FAF8F5] p-3 rounded-full shadow-2xl z-30 flex items-center justify-center border border-[#1F1D1A]/10">
+              <svg className="w-full h-full stroke-[#1F1D1A] fill-none stroke-[1.2]" viewBox="0 0 100 100">
+                <path d="M50 10 C25 25, 20 60, 50 90 M50 10 C75 25, 80 60, 50 90" />
+                <path d="M50 10 L50 90" strokeDasharray="3 3" />
+                <path d="M50 30 C35 35, 30 45, 25 50 M50 30 C65 35, 70 45, 75 50" />
+                <path d="M50 50 C35 55, 30 65, 25 70 M50 50 C65 55, 70 65, 75 70" />
+                <path d="M50 70 C40 73, 35 80, 30 83 M50 70 C60 73, 65 80, 70 83" />
+              </svg>
+            </div>
+          </div>
+
         </div>
+
+        {/* Bottom Row: Sweeping Expanded Headline Text + Right Architectural Detail Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-end mt-4 sm:mt-6">
+          
+          {/* Sweeping Expanded Headline Text */}
+          <div className="lg:col-span-8">
+            <h2 className="font-sans font-extralight text-2xl sm:text-3xl lg:text-[2.6rem] text-[#1F1D1A] tracking-tight leading-[1.25] uppercase">
+              BETWEEN UNSPOILED COASTAL NATURE, ERGONOMIC SANCTUARY LIVING, AND INTUITIVE SMART ARCHITECTURE—WHERE SILENT AUTOMATION HARMONIZES EFFORTLESSLY WITH TIMELESS WELL-BEING
+            </h2>
+          </div>
+
+          {/* Right Bottom Architectural Detail Image */}
+          <div className="lg:col-span-4 flex justify-end">
+            <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-none overflow-hidden shadow-2xl border-4 border-white">
+              <Image
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=90"
+                alt="Sunlit architectural timber terrace and olive grove courtyard detail"
+                fill
+                unoptimized
+                className="object-cover"
+                sizes="320px"
+              />
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

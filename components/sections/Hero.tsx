@@ -9,7 +9,6 @@ export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const imageFrameRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
 
   useGSAP(
     () => {
@@ -23,51 +22,41 @@ export function Hero() {
         imageRef.current,
         { scale: 1.0 },
         {
-          scale: 1.25,
+          scale: 1.35,
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'top top',
             end: 'bottom top',
-            scrub: 1,
+            scrub: 0.5,
           },
         }
       );
 
       const mainTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // 1. Image comes FROM UP to its normal position
+      // 1. Main Image comes FROM UP
       mainTl.fromTo(
         imageFrameRef.current,
         { y: -140, opacity: 0 },
         { y: 0, opacity: 1, duration: 1.3, ease: 'power3.out' }
       );
 
-      // 2. Bottom text comes FROM DOWN to its normal position
+      // 2. Bottom text comes FROM DOWN
       mainTl.fromTo(
         '.hero-text-container',
-        { y: 120, opacity: 0 },
+        { y: 100, opacity: 0 },
         { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' },
         '-=0.8'
       );
 
-      // 3. Line-drawing animation on botanical SVG paths
-      const paths = containerRef.current.querySelectorAll('.draw-path');
-      paths.forEach((path) => {
-        const p = path as SVGPathElement;
-        const length = p.getTotalLength ? p.getTotalLength() : 300;
-        gsap.set(p, { strokeDasharray: length, strokeDashoffset: length });
-        
-        mainTl.to(
-          p,
-          {
-            strokeDashoffset: 0,
-            duration: 1.6,
-            ease: 'power2.inOut',
-          },
-          '-=1.0'
-        );
-      });
+      // 3. Floating Sticker entrance
+      mainTl.fromTo(
+        '.photo-sticker',
+        { scale: 0, rotate: -20, opacity: 0 },
+        { scale: 1, rotate: -6, opacity: 1, duration: 0.8, ease: 'back.out(1.7)' },
+        '-=0.4'
+      );
     },
     { scope: containerRef }
   );
@@ -75,18 +64,16 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full pt-4 sm:pt-6 pb-12 bg-[#FAF8F5] text-[#1F1D1A] overflow-hidden flex flex-col justify-between"
+      className="relative min-h-screen w-full pt-2 sm:pt-4 pb-2 bg-[#FAF8F5] text-[#1F1D1A] overflow-visible flex flex-col justify-start gap-1"
     >
-      <div className="w-full pl-3 sm:pl-4 lg:pl-6 pr-6 sm:pr-8 lg:pr-12 mx-auto flex-1 flex flex-col justify-between">
+      <div className="w-full px-3 sm:px-4 lg:px-6 mx-auto flex-1 flex flex-col justify-start">
         
-        {/* Asymmetrical Grid: Image on Left (67% width) */}
+        {/* Main Villa Photo: Wider width (9 out of 12 columns ~75%) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
-          {/* Left Column: Villa Photo Coming From UP on Refresh */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-9 xl:col-span-9">
             <div
               ref={imageFrameRef}
-              className="relative w-full h-[60vh] sm:h-[68vh] lg:h-[74vh] overflow-hidden bg-neutral-200 shadow-xl rounded-none"
+              className="relative w-full h-[60vh] sm:h-[72vh] lg:h-[78vh] overflow-hidden bg-neutral-200 shadow-2xl rounded-none"
             >
               <Image
                 ref={imageRef}
@@ -95,54 +82,37 @@ export function Hero() {
                 fill
                 priority
                 unoptimized
-                className="object-cover transition-transform ease-out"
-                sizes="(max-width: 1024px) 100vw, 67vw"
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 75vw"
               />
             </div>
           </div>
-
-          {/* Right Column: Open Off-White Space */}
-          <div className="lg:col-span-4 hidden lg:block" />
-
         </div>
 
-        {/* Spanning Bottom Statement Typography (Coming FROM DOWN + Line Drawing Animation) */}
-        <div className="hero-text-container mt-8 pt-4 w-full">
-          <div className="flex flex-col sm:flex-row items-baseline justify-between gap-4 w-full">
+        {/* Statement Typography: Spanning full width, VINE in line outline serif, SANCTUARY in solid black */}
+        <div className="hero-text-container -mt-4 sm:-mt-8 lg:-mt-12 w-full relative z-10">
+          <div className="relative flex flex-nowrap items-baseline justify-between w-full whitespace-nowrap overflow-visible">
             
-            {/* Left Serif Number Index */}
-            <div className="font-serif text-7xl sm:text-9xl lg:text-[10rem] font-light text-[#1F1D1A]/20 tracking-tighter shrink-0 select-none leading-none">
-              01
-            </div>
+            {/* VINE - Outlined Line Text */}
+            <span className="font-serif text-transparent [-webkit-text-stroke:1.5px_#1F1D1A] sm:[-webkit-text-stroke:2.5px_#1F1D1A] lg:[-webkit-text-stroke:3.2px_#1F1D1A] text-[8.5vw] sm:text-[9.5vw] lg:text-[10.2vw] xl:text-[10.5vw] font-light tracking-wider select-none leading-none">
+              VINE
+            </span>
 
-            {/* Full-Width Spanning Word: SANCTUARY + Hand-Drawn SVG Line Motif */}
-            <div className="relative flex-1 flex flex-wrap items-center justify-end gap-4 sm:gap-8 w-full">
-              
-              {/* Architectural Stroke Line-Art Font Style */}
-              <span
-                className="font-serif text-5xl sm:text-7xl lg:text-[9rem] font-semibold tracking-tight leading-none text-[#1F1D1A] transition-all"
-                style={{
-                  WebkitTextStroke: '1px #1F1D1A',
-                }}
-              >
-                SANCTUARY
-              </span>
+            {/* SANCTUARY - Huge Solid Black Extra Bold Text */}
+            <span className="font-sans text-[8.8vw] sm:text-[10vw] lg:text-[10.8vw] xl:text-[11.2vw] font-black tracking-tighter text-[#1F1D1A] leading-none">
+              SANCTUARY
+            </span>
 
-              {/* Real-time Hand-Drawn Botanical SVG Line Motif */}
-              <div className="relative shrink-0 text-[#C85A32] hover:rotate-12 transition-transform duration-700">
-                <svg
-                  ref={svgRef}
-                  className="h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 stroke-current fill-none stroke-[1.4]"
-                  viewBox="0 0 100 100"
-                >
-                  <path className="draw-path" d="M50 15 C35 30, 35 70, 50 85 C65 70, 65 30, 50 15 Z" />
-                  <path className="draw-path" d="M15 50 C30 35, 70 35, 85 50 C70 65, 30 65, 15 50 Z" />
-                  <path className="draw-path" d="M25 25 C40 40, 60 40, 75 75 C60 60, 40 60, 25 25 Z" />
-                  <path className="draw-path" d="M75 25 C60 40, 40 40, 25 75 C40 60, 60 60, 75 25 Z" />
-                  <circle cx="50" cy="50" r="6" className="fill-[#C85A32] draw-path" />
-                </svg>
-              </div>
-
+            {/* Floating Photo Sticker positioned directly over top of "RY" in SANCTUARY */}
+            <div className="photo-sticker absolute right-0 sm:right-2 lg:right-3 -top-8 sm:-top-16 lg:-top-24 w-20 h-14 sm:w-32 sm:h-22 lg:w-44 lg:h-30 rounded-2xl overflow-hidden shadow-2xl border-2 border-white transform -rotate-6 transition-transform hover:scale-110 hover:rotate-0 shrink-0 z-30">
+              <Image
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80"
+                alt="Natural terrace lounge detail"
+                fill
+                unoptimized
+                className="object-cover"
+                sizes="200px"
+              />
             </div>
 
           </div>
