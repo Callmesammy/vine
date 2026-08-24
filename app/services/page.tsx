@@ -59,7 +59,7 @@ export default function ServicesPage() {
     <main ref={pageRef} className="min-h-screen bg-[#FAF8F5] text-[#1F1D1A]">
       <Navbar />
 
-      {/* Hero Section: Matching Reference Screenshots 1 & 2 */}
+      {/* Hero Section */}
       <section className="relative w-full pt-28 sm:pt-36 pb-16 px-4 sm:px-8 lg:px-12 overflow-hidden">
         <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -78,7 +78,7 @@ export default function ServicesPage() {
               sizes="(max-width: 1024px) 100vw, 33vw"
             />
 
-            {/* Overlaid Calla Lily / Anthurium Flower Line-Art Sticker Badge (Matching Screenshot 1) */}
+            {/* Overlaid Calla Lily / Anthurium Flower Line-Art Sticker Badge */}
             <div className="absolute top-2 -right-4 w-32 h-32 sm:w-44 sm:h-44 pointer-events-none z-20">
               <svg className="w-full h-full stroke-black fill-white stroke-[1.8]" viewBox="0 0 100 100">
                 <path d="M45 85 C40 60, 35 40, 50 15 C65 25, 75 45, 60 70 Z" />
@@ -91,7 +91,7 @@ export default function ServicesPage() {
           {/* Right Column: Sweeping Headline + Multi-Page Tall Poolside Dining Image Container */}
           <div className="lg:col-span-8 flex flex-col space-y-8">
             
-            {/* Top Headline: Matching Screenshot 1 */}
+            {/* Top Headline */}
             <div className="pt-2">
               <h1
                 ref={headlineRef}
@@ -101,13 +101,13 @@ export default function ServicesPage() {
               </h1>
             </div>
 
-            {/* Multi-Page Tall Image (Extends Down 2 Pages - Matching Screenshot 1 & 2) */}
+            {/* Multi-Page Tall Image */}
             <div
               ref={mainImageRef}
               className="relative w-full h-[850px] sm:h-[1200px] lg:h-[1450px] rounded-none overflow-hidden shadow-2xl bg-neutral-200"
             >
               <Image
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=90"
+                src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=2400&q=90"
                 alt="Tropical poolside villa dining table with woven rattan pendant lights"
                 fill
                 priority
@@ -122,7 +122,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Page 3: Centered Statement (Matching Reference Screenshot 1) */}
+      {/* Page 3: Centered Statement */}
       <section className="relative w-full bg-[#FAF8F5] text-[#1F1D1A] py-24 sm:py-32 px-6 border-t border-[#1F1D1A]/10">
         <div className="text-center max-w-4xl mx-auto space-y-4">
           <h2 className="font-serif font-light text-4xl sm:text-6xl lg:text-7xl text-[#1F1D1A] tracking-tight leading-tight">
@@ -131,7 +131,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Page 4: 2-Page Height Overhead Pool & Terrace Image (Matching Reference Screenshot 2) */}
+      {/* Page 4: 2-Page Height Overhead Pool & Terrace Image */}
       <section className="relative w-full h-[200vh] overflow-hidden z-20 bg-[#FAF8F5]">
         <div className="parallax-nature-image relative w-full h-full transform-gpu">
           <Image
@@ -145,18 +145,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Page 4: Dedicated Concierge Statement & Wavy Line Label (Matching Reference Screenshot 1) */}
+      {/* Page 4: Dedicated Concierge Statement */}
       <section className="relative w-full bg-[#FAF8F5] text-[#1F1D1A] pt-20 sm:pt-28 pb-8 px-4 sm:px-8 lg:px-12 border-t border-[#1F1D1A]/10">
         <div className="w-full mx-auto space-y-12">
-          
-          {/* Sweeping Thin Editorial Paragraph Text */}
           <div className="max-w-6xl">
             <p className="font-sans font-extralight text-2xl sm:text-4xl lg:text-[3.4rem] text-[#1F1D1A] tracking-tight leading-[1.2]">
               Each of our villas provides a dedicated concierge service ensuring personalized experiences and attentive care.
             </p>
           </div>
 
-          {/* Right-Aligned Label with SVG Wavy Line (Matching Screenshot 1) */}
           <div className="flex justify-end pt-4">
             <div className="inline-flex flex-col items-end group cursor-pointer">
               <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#1F1D1A]">
@@ -167,18 +164,17 @@ export default function ServicesPage() {
               </svg>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* Page 5: Dual Dining & Pool Photos with Hand-Drawn Lotus Flower Sticker (Matching Reference Screenshot 2) */}
+      {/* Page 5: Dual Dining & Pool Photos with Hand-Drawn Lotus Flower Sticker */}
       <section className="relative w-full bg-[#FAF8F5] text-[#1F1D1A] pb-24 px-4 sm:px-8 lg:px-12">
         <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Photo: Indoor Dining Room & Kitchen with Overlaid Lotus Flower Sticker */}
+          {/* Left Photo */}
           <div className="lg:col-span-6 relative h-[500px] sm:h-[650px] rounded-none overflow-hidden shadow-2xl bg-neutral-200">
             <Image
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
+              src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=85"
               alt="Indoor dining table with rattan chairs and woven pendant lights"
               fill
               unoptimized
@@ -186,7 +182,7 @@ export default function ServicesPage() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
 
-            {/* Overlaid Hand-Drawn Lotus Flower Line-Art Sticker Badge (Matching Screenshot 2) */}
+            {/* Overlaid Hand-Drawn Lotus Flower Line-Art Sticker Badge */}
             <div className="absolute -bottom-4 -right-4 w-32 h-32 sm:w-44 sm:h-44 pointer-events-none z-30">
               <svg className="w-full h-full stroke-black fill-white stroke-[1.8]" viewBox="0 0 100 100">
                 <path d="M50 85 C35 70, 20 50, 30 25 C40 10, 50 20, 50 35 C50 20, 60 10, 70 25 C80 50, 65 70, 50 85 Z" />
@@ -196,10 +192,10 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* Right Top Photo: Outdoor Pool Terrace */}
+          {/* Right Top Photo */}
           <div className="lg:col-span-6 relative h-[320px] sm:h-[420px] rounded-none overflow-hidden shadow-2xl bg-neutral-200">
             <Image
-              src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=85"
+              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85"
               alt="Turquoise outdoor pool terrace with sun loungers"
               fill
               unoptimized
@@ -275,14 +271,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Page 11: WAY MORE THAN YOU CAN EXPECT & INCLUDED SERVICES Label (Matching Reference Screenshot 2) */}
+      {/* Segment: WAY MORE THAN YOU CAN EXPECT */}
       <section className="relative w-full bg-[#FAF8F5] text-[#1F1D1A] py-20 sm:py-28 px-4 sm:px-8 lg:px-12 border-t border-[#1F1D1A]/10">
         <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Photo: Villa Entrance Walkway & Tropical Garden */}
           <div className="lg:col-span-4 relative h-[480px] sm:h-[620px] rounded-none overflow-hidden shadow-2xl bg-neutral-200">
             <Image
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"
+              src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=85"
               alt="Villa entrance wooden door with tropical walkway"
               fill
               unoptimized
@@ -291,16 +286,13 @@ export default function ServicesPage() {
             />
           </div>
 
-          {/* Right Column: Sweeping Headline & Right-Aligned INCLUDED SERVICES Wavy Label */}
           <div className="lg:col-span-8 flex flex-col justify-between space-y-12">
-            
             <div>
               <h2 className="font-sans font-extralight text-4xl sm:text-6xl lg:text-[4.5rem] text-[#1F1D1A] tracking-tight leading-[1.08] uppercase">
                 WAY MORE THAN YOU CAN EXPECT
               </h2>
             </div>
 
-            {/* Right-Aligned Label with SVG Wavy Line (Matching Screenshot 2) */}
             <div className="flex justify-end pt-12">
               <div className="inline-flex flex-col items-end group cursor-pointer">
                 <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#1F1D1A]">
@@ -311,13 +303,12 @@ export default function ServicesPage() {
                 </svg>
               </div>
             </div>
-
           </div>
 
         </div>
       </section>
 
-      {/* Page 12: 2-Page Height Flying Macaw Parrot Parallax Image (Matching Reference Screenshot 3) */}
+      {/* Page Parallax Macaw */}
       <section className="relative w-full h-[200vh] overflow-hidden z-20 bg-[#FAF8F5]">
         <div className="parallax-nature-image relative w-full h-full transform-gpu">
           <Image
@@ -331,7 +322,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Page 13: Submenu Footer (Matching Reference Screenshot 1) */}
       <Footer />
     </main>
   );

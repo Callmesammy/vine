@@ -283,7 +283,7 @@ export default function ResidenceDetailPage({ params }: PageProps) {
       <section className="relative w-full h-[200vh] overflow-hidden z-20 bg-[#FAF8F5]">
         <div className="parallax-nature-image relative w-full h-full transform-gpu">
           <Image
-            src={property.mainImage}
+            src={property.outdoorLoungeImage}
             alt={`${property.name} expansive estate backdrop`}
             fill
             unoptimized
