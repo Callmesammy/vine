@@ -105,17 +105,17 @@ export function HorizontalShowcase() {
         {STACKED_SHOWCASE_PROPERTIES.map((property, index) => (
           <div
             key={property.id}
-            className="stacked-villa-slide absolute inset-0 h-screen w-full flex flex-col justify-between px-4 sm:px-6 lg:px-12 pt-8 pb-4 overflow-hidden shadow-2xl transition-colors"
+            className="stacked-villa-slide absolute inset-0 h-screen w-full flex flex-col justify-between px-4 sm:px-6 lg:px-12 pt-16 sm:pt-8 pb-4 overflow-hidden shadow-2xl transition-colors"
             style={{
               backgroundColor: property.bgColor,
               zIndex: 10 + index,
             }}
           >
             {/* Top Row: Left Image + Top Right Description & DISCOVER CTA */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start flex-1 pt-6 sm:pt-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-start flex-1 pt-2 sm:pt-10">
               
               {/* Left Column: Tall Vertical Villa Photography */}
-              <div className="lg:col-span-5 h-[45vh] sm:h-[54vh] lg:h-[58vh] relative overflow-hidden rounded-none shadow-2xl">
+              <div className="lg:col-span-5 h-[34vh] sm:h-[54vh] lg:h-[58vh] relative overflow-hidden rounded-none shadow-2xl">
                 <Image
                   src={property.image}
                   fill
@@ -127,8 +127,8 @@ export function HorizontalShowcase() {
               </div>
 
               {/* Right Column: Top Right Specs & DISCOVER Link */}
-              <div className="lg:col-span-7 lg:pl-8 flex flex-col items-start lg:items-end text-left lg:text-right space-y-6 pt-2 text-white">
-                <p className="font-sans font-light text-sm sm:text-base lg:text-lg leading-relaxed max-w-md opacity-90">
+              <div className="lg:col-span-7 lg:pl-8 flex flex-col items-start lg:items-end text-left lg:text-right space-y-4 sm:space-y-6 pt-1 text-white">
+                <p className="font-sans font-light text-xs sm:text-base lg:text-lg leading-relaxed max-w-md opacity-90">
                   {property.specs}
                 </p>
 
@@ -165,14 +165,14 @@ export function HorizontalShowcase() {
       </div>
 
       {/* Continuation Section (Unpinned, continues scrolling naturally into lower sections) */}
-      <div className="relative w-full bg-[#FAF8F5] pt-12 sm:pt-20 pb-24 px-4 sm:px-6 lg:px-12 z-40">
+      <div className="relative w-full bg-[#FAF8F5] pt-6 sm:pt-20 pb-12 sm:pb-24 px-4 sm:px-6 lg:px-12 z-40">
         
         {/* Big Aerial Ocean Photo Overlapping Top Background + Mini Leaf Sticker */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Main Aerial Coastal Landscape Image + Mini Leaf Sticker */}
           <div className="lg:col-span-9 relative">
-            <div className="relative w-full h-[55vh] sm:h-[70vh] lg:h-[80vh] overflow-hidden rounded-none shadow-2xl -mt-24 sm:-mt-36 lg:-mt-48 z-10 bg-neutral-200">
+            <div className="relative w-full h-[35vh] sm:h-[70vh] lg:h-[80vh] overflow-hidden rounded-none shadow-2xl -mt-12 sm:-mt-36 lg:-mt-48 z-10 bg-neutral-200">
               <Image
                 src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=90"
                 alt="Aerial coastal sanctuary between turquoise ocean and tropical rainforest"
@@ -184,7 +184,7 @@ export function HorizontalShowcase() {
             </div>
 
             {/* Mini Leaf Line-Art Sticker Badge */}
-            <div className="absolute -top-32 sm:-top-44 lg:-top-56 right-4 sm:right-8 lg:right-12 w-24 h-24 sm:w-36 sm:h-36 bg-[#FAF8F5] p-3 rounded-full shadow-2xl z-30 flex items-center justify-center border border-[#1F1D1A]/10">
+            <div className="absolute -top-16 sm:-top-44 lg:-top-56 right-2 sm:right-8 lg:right-12 w-16 h-16 sm:w-36 sm:h-36 bg-[#FAF8F5] p-2 sm:p-3 rounded-full shadow-2xl z-30 flex items-center justify-center border border-[#1F1D1A]/10">
               <svg className="w-full h-full stroke-[#1F1D1A] fill-none stroke-[1.2]" viewBox="0 0 100 100">
                 <path d="M50 10 C25 25, 20 60, 50 90 M50 10 C75 25, 80 60, 50 90" />
                 <path d="M50 10 L50 90" strokeDasharray="3 3" />

@@ -39,20 +39,20 @@ export function ValuesPhilosophy() {
   return (
     <section
       ref={containerRef}
-      className="pt-1 pb-20 bg-[#FAF8F5] text-[#1F1D1A] overflow-visible relative z-20"
+      className="pt-2 sm:pt-1 pb-8 sm:pb-20 bg-[#FAF8F5] text-[#1F1D1A] overflow-visible relative z-20"
     >
-      <div className="w-full px-3 sm:px-4 lg:px-6 mx-auto space-y-16">
+      <div className="w-full px-3 sm:px-4 lg:px-6 mx-auto space-y-6 sm:space-y-16">
         
         {/* Asymmetrical 2-Column Composition: Long Vertical Photos + Editorial Text */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-start">
           
           {/* Left Column: Label + Tall Vertical First Photo */}
-          <div className="lg:col-span-6 space-y-3 relative z-30 pt-4 sm:pt-6 lg:pt-8">
+          <div className="lg:col-span-6 space-y-3 relative z-30 pt-2 sm:pt-6 lg:pt-8">
             <span className="philosophy-reveal block text-xs font-medium uppercase tracking-widest text-[#615C55]">
               Architectural Harmony & Natural Illumination
             </span>
             
-            <div className="philosophy-reveal relative w-full h-[95vh] sm:h-[120vh] lg:h-[140vh] overflow-hidden bg-neutral-200 rounded-none shadow-2xl">
+            <div className="philosophy-reveal relative w-full h-[45vh] sm:h-[120vh] lg:h-[140vh] overflow-hidden bg-neutral-200 rounded-none shadow-2xl">
               <Image
                 src={VALUES_IMAGE}
                 alt="Sun-drenched private terrace surrounded by olive groves"
@@ -65,10 +65,10 @@ export function ValuesPhilosophy() {
           </div>
 
           {/* Right Column: Tall Vertical Second Photo + Editorial Narrative Text */}
-          <div className="lg:col-span-6 space-y-8 lg:pt-12">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-8 lg:pt-12">
             
             {/* Tall Vertical Second Photo */}
-            <div className="philosophy-reveal relative w-full h-[85vh] sm:h-[105vh] lg:h-[125vh] overflow-hidden bg-neutral-200 rounded-none shadow-2xl">
+            <div className="philosophy-reveal relative w-full h-[40vh] sm:h-[105vh] lg:h-[125vh] overflow-hidden bg-neutral-200 rounded-none shadow-2xl">
               <Image
                 src={KITCHEN_IMAGE}
                 alt="Intuitive morning bar with glare-free warm timber features"

@@ -45,8 +45,8 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
 
     gsap.ticker.add(updateTicker);
 
-    // Disable GSAP lag smoothing to ensure silky smooth scrub transitions
-    gsap.ticker.lagSmoothing(0);
+    // Enable GSAP lag smoothing for smooth scrub transitions during frame updates
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Intercept clicks on internal anchor links for smooth scrolling via Lenis
     const handleAnchorClick = (e: MouseEvent) => {

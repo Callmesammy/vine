@@ -70,7 +70,7 @@ export function SmartAutomationTabs() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-[300vh] sm:min-h-[330vh] lg:min-h-[360vh] overflow-hidden z-20 pb-20 lg:pb-32"
+      className="relative w-full min-h-[160vh] sm:min-h-[330vh] lg:min-h-[360vh] overflow-hidden z-20 pb-10 sm:pb-20 lg:pb-32"
     >
       {/* Long Architectural Background Image from Unsplash */}
       <div className="absolute inset-0 z-0">
@@ -87,8 +87,8 @@ export function SmartAutomationTabs() {
       </div>
 
       {/* First Segment: 2 Fresh Unsplash Photos with Organic Hand-Drawn White Line Sketch Frames */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-20 sm:pt-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 pt-12 sm:pt-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           
           {/* First Fresh Photo (Left Column) with Hand-Drawn Sketch Line Frame */}
           <div className="animated-white-frame lg:col-span-6 relative flex justify-start">
@@ -97,7 +97,7 @@ export function SmartAutomationTabs() {
               <HandDrawnSketchFrame />
               
               {/* Image Container */}
-              <div className="relative w-72 h-96 sm:w-96 sm:h-[480px] lg:w-[440px] lg:h-[540px] overflow-hidden rounded-none shadow-2xl bg-neutral-900">
+              <div className="relative w-full max-w-[280px] h-72 sm:w-96 sm:h-[480px] lg:w-[440px] lg:h-[540px] overflow-hidden rounded-none shadow-2xl bg-neutral-900">
                 <Image
                   src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=90"
                   alt="Sunlit luxury estate pool terrace with modern stone architecture"
@@ -111,13 +111,13 @@ export function SmartAutomationTabs() {
           </div>
 
           {/* Second Fresh Photo (Right Column Offset Down) with Hand-Drawn Sketch Line Frame */}
-          <div className="animated-white-frame lg:col-span-6 relative flex justify-end pt-12 lg:pt-32">
+          <div className="animated-white-frame lg:col-span-6 relative flex justify-end pt-6 sm:pt-12 lg:pt-32">
             <div className="relative group">
               {/* Organic Hand-Drawn White Line Sketch Frame */}
               <HandDrawnSketchFrame />
               
               {/* Image Container */}
-              <div className="relative w-72 h-96 sm:w-96 sm:h-[480px] lg:w-[440px] lg:h-[540px] overflow-hidden rounded-none shadow-2xl bg-neutral-900">
+              <div className="relative w-full max-w-[280px] h-72 sm:w-96 sm:h-[480px] lg:w-[440px] lg:h-[540px] overflow-hidden rounded-none shadow-2xl bg-neutral-900">
                 <Image
                   src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=90"
                   alt="Contemporary architectural outdoor lounge terrace with lush greenery"
@@ -134,20 +134,12 @@ export function SmartAutomationTabs() {
       </div>
 
       {/* Segment 2: Big White Line Frame with Continuous Moving Dashed Line Animation (Matching Screenshot 2) */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mt-32 sm:mt-48 lg:mt-64">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mt-12 sm:mt-48 lg:mt-64">
         
-        <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[75vh] flex flex-col justify-between p-6 sm:p-12 lg:p-16">
+        <div className="relative w-full h-[42vh] sm:h-[70vh] lg:h-[75vh] flex flex-col justify-between p-4 sm:p-12 lg:p-16">
           
           {/* Continuous Moving White Line Animation Frame (Authentic Hand-Drawn Sketch Lines) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible" viewBox="0 0 1000 600" preserveAspectRatio="none">
-            <defs>
-              {/* Hand-Drawn Ink & Pen Sketch Displacement Filter */}
-              <filter id="handDrawnSketchFilter" x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
-              </filter>
-            </defs>
-
             <style>{`
               @keyframes continuousDashMove {
                 0% { stroke-dashoffset: 0; }
@@ -167,7 +159,6 @@ export function SmartAutomationTabs() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeDasharray="150 45 45 45"
-              filter="url(#handDrawnSketchFilter)"
               className="animate-continuous-dash opacity-95"
             />
 
@@ -178,7 +169,6 @@ export function SmartAutomationTabs() {
               stroke="#FFFFFF"
               strokeWidth="2.5"
               strokeLinecap="round"
-              filter="url(#handDrawnSketchFilter)"
               className="opacity-75"
             />
           </svg>
@@ -186,7 +176,7 @@ export function SmartAutomationTabs() {
           {/* Top Right: Handwriting / Fine Script Text About the Company */}
           <div className="flex justify-end relative z-30">
             <div className="max-w-md text-right space-y-2">
-              <p className="font-serif italic text-xl sm:text-2xl lg:text-3xl text-white drop-shadow-lg tracking-wide leading-snug">
+              <p className="font-serif italic text-base sm:text-2xl lg:text-3xl text-white drop-shadow-lg tracking-wide leading-snug">
                 “Crafting quiet sanctuaries where architecture, untouched nature, and ambient intelligence exist in timeless balance.”
               </p>
               <span className="block text-xs uppercase tracking-widest text-[#FAF8F5]/90 font-light pt-1">
@@ -196,8 +186,8 @@ export function SmartAutomationTabs() {
           </div>
 
           {/* Bottom Left: Image Overlapping the Bottom-Left Corner of the Line (Made bigger as requested) */}
-          <div className="relative z-30 flex justify-start items-end mt-8 sm:mt-12 lg:mt-16">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[380px] lg:h-[380px] shadow-2xl rounded-none border-4 border-white overflow-hidden -ml-2 -mb-2 sm:-ml-4 sm:-mb-4 bg-neutral-900">
+          <div className="relative z-30 flex justify-start items-end mt-4 sm:mt-12 lg:mt-16">
+            <div className="relative w-44 h-44 sm:w-80 sm:h-80 lg:w-[380px] lg:h-[380px] shadow-2xl rounded-none border-4 border-white overflow-hidden -ml-2 -mb-2 sm:-ml-4 sm:-mb-4 bg-neutral-900">
               <Image
                 src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1000&q=90"
                 alt="Tropical nature detail photo"
@@ -214,10 +204,10 @@ export function SmartAutomationTabs() {
       </div>
 
       {/* Segment 3: Cool Floating 3-Card Architectural Showcase Grid */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mt-28 sm:mt-40 lg:mt-48 pb-20 lg:pb-28">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 mt-12 sm:mt-40 lg:mt-48 pb-10 sm:pb-20 lg:pb-28">
         
         {/* Sweeping Thin Serif Section Title */}
-        <div className="text-center space-y-3 mb-16">
+        <div className="text-center space-y-3 mb-8 sm:mb-16">
           <span className="block text-xs uppercase tracking-widest text-[#FAF8F5]/80 font-light">
             Architectural Sanctuary Detail
           </span>

@@ -64,7 +64,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full pt-2 sm:pt-4 pb-2 bg-[#FAF8F5] text-[#1F1D1A] overflow-visible flex flex-col justify-start gap-1"
+      className="relative min-h-[auto] sm:min-h-screen w-full pt-2 sm:pt-4 pb-2 bg-[#FAF8F5] text-[#1F1D1A] overflow-visible flex flex-col justify-start gap-1"
     >
       <div className="w-full px-3 sm:px-4 lg:px-6 mx-auto flex-1 flex flex-col justify-start">
         
@@ -73,7 +73,7 @@ export function Hero() {
           <div className="lg:col-span-9 xl:col-span-9">
             <div
               ref={imageFrameRef}
-              className="relative w-full h-[60vh] sm:h-[72vh] lg:h-[78vh] overflow-hidden bg-neutral-200 shadow-2xl rounded-none"
+              className="relative w-full h-[40vh] sm:h-[72vh] lg:h-[78vh] overflow-hidden bg-neutral-200 shadow-2xl rounded-none"
             >
               <Image
                 ref={imageRef}
@@ -90,7 +90,7 @@ export function Hero() {
         </div>
 
         {/* Statement Typography: Spanning full width, VINE in line outline serif, SANCTUARY in solid black */}
-        <div className="hero-text-container -mt-4 sm:-mt-8 lg:-mt-12 w-full relative z-10">
+        <div className="hero-text-container -mt-6 sm:-mt-8 lg:-mt-12 w-full relative z-10">
           <div className="relative flex flex-nowrap items-baseline justify-between w-full whitespace-nowrap overflow-visible">
             
             {/* VINE - Outlined Line Text */}
@@ -104,7 +104,7 @@ export function Hero() {
             </span>
 
             {/* Floating Photo Sticker positioned directly over top of "RY" in SANCTUARY */}
-            <div className="photo-sticker absolute right-0 sm:right-2 lg:right-3 -top-8 sm:-top-16 lg:-top-24 w-20 h-14 sm:w-32 sm:h-22 lg:w-44 lg:h-30 rounded-2xl overflow-hidden shadow-2xl border-2 border-white transform -rotate-6 transition-transform hover:scale-110 hover:rotate-0 shrink-0 z-30">
+            <div className="photo-sticker absolute right-0 sm:right-2 lg:right-3 -top-6 sm:-top-16 lg:-top-24 w-20 h-14 sm:w-32 sm:h-22 lg:w-44 lg:h-30 rounded-2xl overflow-hidden shadow-2xl border-2 border-white transform -rotate-6 transition-transform hover:scale-110 hover:rotate-0 shrink-0 z-30">
               <Image
                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80"
                 alt="Natural terrace lounge detail"
