@@ -75,7 +75,7 @@ export function SmartAutomationTabs() {
       {/* Long Architectural Background Image from Unsplash */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=2400&q=90"
+          src="/images/hero/sprawling-sanctuary.jpg"
           alt="Sprawling luxury architectural sanctuary backdrop"
           fill
           unoptimized
@@ -99,7 +99,7 @@ export function SmartAutomationTabs() {
               {/* Image Container */}
               <div className="relative w-full max-w-[280px] h-72 sm:w-96 sm:h-[480px] lg:w-[440px] lg:h-[540px] overflow-hidden rounded-none shadow-2xl bg-neutral-900">
                 <Image
-                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=90"
+                  src="/images/residences/orchard-pool.jpg"
                   alt="Sunlit luxury estate pool terrace with modern stone architecture"
                   fill
                   unoptimized
@@ -119,7 +119,7 @@ export function SmartAutomationTabs() {
               {/* Image Container */}
               <div className="relative w-full max-w-[280px] h-72 sm:w-96 sm:h-[480px] lg:w-[440px] lg:h-[540px] overflow-hidden rounded-none shadow-2xl bg-neutral-900">
                 <Image
-                  src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=90"
+                  src="/images/residences/meadow-outdoor-lounge.jpg"
                   alt="Contemporary architectural outdoor lounge terrace with lush greenery"
                   fill
                   unoptimized
@@ -189,7 +189,7 @@ export function SmartAutomationTabs() {
           <div className="relative z-30 flex justify-start items-end mt-4 sm:mt-12 lg:mt-16">
             <div className="relative w-44 h-44 sm:w-80 sm:h-80 lg:w-[380px] lg:h-[380px] shadow-2xl rounded-none border-4 border-white overflow-hidden -ml-2 -mb-2 sm:-ml-4 sm:-mb-4 bg-neutral-900">
               <Image
-                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1000&q=90"
+                src="/images/hero/aerial-coastal.jpg"
                 alt="Tropical nature detail photo"
                 fill
                 unoptimized
@@ -223,7 +223,7 @@ export function SmartAutomationTabs() {
           <div className="animated-white-frame lg:col-span-4 relative group">
             <div className="relative w-full h-80 sm:h-[380px] overflow-hidden rounded-none shadow-2xl border-4 border-white bg-neutral-900 transition-transform duration-700 group-hover:scale-105">
               <Image
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=90"
+                src="/images/residences/meadow-main.jpg"
                 alt="Sunlit courtyard detail"
                 fill
                 unoptimized
@@ -240,7 +240,7 @@ export function SmartAutomationTabs() {
           <div className="animated-white-frame lg:col-span-5 relative group z-20 -my-4 lg:-my-8">
             <div className="relative w-full h-[400px] sm:h-[480px] overflow-hidden rounded-none shadow-2xl border-4 border-white bg-neutral-900 transition-transform duration-700 group-hover:scale-105">
               <Image
-                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=90"
+                src="/images/residences/orchard-main.jpg"
                 alt="Luxury pavilion estate"
                 fill
                 unoptimized
@@ -258,7 +258,7 @@ export function SmartAutomationTabs() {
           <div className="animated-white-frame lg:col-span-3 relative group">
             <div className="relative w-full h-80 sm:h-[380px] overflow-hidden rounded-none shadow-2xl border-4 border-white bg-neutral-900 transition-transform duration-700 group-hover:scale-105">
               <Image
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=90"
+                src="/images/residences/palma-main.jpg"
                 alt="Ocean view villa terrace"
                 fill
                 unoptimized

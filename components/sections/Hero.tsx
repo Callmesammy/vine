@@ -77,7 +77,7 @@ export function Hero() {
             >
               <Image
                 ref={imageRef}
-                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=90"
+                src="/images/hero/hero-villa.jpg"
                 alt="Architectural single-level villa with private pool"
                 fill
                 priority
@@ -106,7 +106,7 @@ export function Hero() {
             {/* Floating Photo Sticker positioned directly over top of "RY" in SANCTUARY */}
             <div className="photo-sticker absolute right-0 sm:right-2 lg:right-3 -top-6 sm:-top-16 lg:-top-24 w-20 h-14 sm:w-32 sm:h-22 lg:w-44 lg:h-30 rounded-2xl overflow-hidden shadow-2xl border-2 border-white transform -rotate-6 transition-transform hover:scale-110 hover:rotate-0 shrink-0 z-30">
               <Image
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80"
+                src="/images/hero/kitchen-detail.jpg"
                 alt="Natural terrace lounge detail"
                 fill
                 unoptimized

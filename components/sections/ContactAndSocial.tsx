@@ -44,7 +44,7 @@ export function ContactAndSocial() {
             <div className="lg:col-span-5 relative z-30">
               <div className="relative w-full h-[380px] sm:h-[1050px] lg:h-[1250px] rounded-none overflow-hidden shadow-2xl bg-neutral-200 -mb-20 sm:-mb-80 lg:-mb-96">
                 <Image
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=90"
+                  src="/images/residences/meadow-main.jpg"
                   alt="Overhead architectural patio lounge extending down"
                   fill
                   unoptimized
@@ -57,7 +57,7 @@ export function ContactAndSocial() {
             {/* Right Column (7 Cols): Luxury Interior Photo */}
             <div className="lg:col-span-7 h-[300px] sm:h-[620px] lg:h-[700px] relative rounded-none overflow-hidden shadow-2xl bg-neutral-200">
               <Image
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=90"
+                src="/images/hero/luxury-interior.jpg"
                 alt="Spacious luxury dining pavilion and warm timber kitchen interior"
                 fill
                 unoptimized
@@ -90,7 +90,7 @@ export function ContactAndSocial() {
             {/* Left Photo: Spa & Holistic Wellness Massage */}
             <div className="lg:col-span-6 h-[320px] sm:h-[640px] lg:h-[720px] relative rounded-none overflow-hidden shadow-2xl bg-neutral-200">
               <Image
-                src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=90"
+                src="/images/hero/spa-wellness.jpg"
                 alt="Holistic spa wellness massage therapy experience"
                 fill
                 unoptimized
@@ -102,7 +102,7 @@ export function ContactAndSocial() {
             {/* Right Photo: Gourmet Organic Culinary Dining */}
             <div className="lg:col-span-6 h-[260px] sm:h-[500px] lg:h-[580px] relative rounded-none overflow-hidden shadow-2xl bg-neutral-200">
               <Image
-                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=90"
+                src="/images/hero/culinary-dining.jpg"
                 alt="Gourmet organic culinary dining presentation"
                 fill
                 unoptimized
@@ -130,7 +130,7 @@ export function ContactAndSocial() {
       >
         <div className="parallax-nature-image relative w-full h-full transform-gpu">
           <Image
-            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=90"
+            src="/images/hero/hero-villa.jpg"
             alt="Expansive luxury architectural villa estate with infinity pool landscape"
             fill
             unoptimized

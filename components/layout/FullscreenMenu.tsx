@@ -13,42 +13,42 @@ const MENU_NAV_ITEMS = [
   {
     label: 'HOME',
     href: '/',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/hero/hero-villa.jpg',
   },
   {
     label: 'VILLA ORCHARD',
     href: '/residences/orchard-villa',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/residences/orchard-main.jpg',
   },
   {
     label: 'VILLA MEADOW',
     href: '/residences/meadow-estate',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/residences/meadow-main.jpg',
   },
   {
     label: 'VILLA PALMA',
     href: '/residences/palma-residence',
-    image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/residences/palma-main.jpg',
   },
   {
     label: 'VILLA SOLIS',
     href: '/residences/solis-estate',
-    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/residences/solis-main.jpg',
   },
   {
     label: 'VILLA LUNA',
     href: '/residences/luna-residence',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/residences/luna-main.jpg',
   },
   {
     label: 'SERVICES',
     href: '/services',
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/hero/culinary-dining.jpg',
   },
   {
     label: 'CONTACT',
     href: '/contact',
-    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=90',
+    image: '/images/hero/values-philosophy.jpg',
     isBold: true,
   },
 ];

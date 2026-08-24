@@ -534,7 +534,7 @@ export default function ResidenceDetailPage({ params }: PageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-6 h-[380px] sm:h-[480px] relative rounded-none overflow-hidden shadow-xl bg-neutral-200">
               <Image
-                src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1400&q=85"
+                src="/images/hero/spa-wellness.jpg"
                 alt="Spa massage therapy"
                 fill
                 unoptimized
@@ -545,7 +545,7 @@ export default function ResidenceDetailPage({ params }: PageProps) {
 
             <div className="lg:col-span-6 h-[380px] sm:h-[480px] relative rounded-none overflow-hidden shadow-xl bg-neutral-200">
               <Image
-                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=85"
+                src="/images/hero/culinary-dining.jpg"
                 alt="Private chef culinary dish"
                 fill
                 unoptimized
